@@ -1,0 +1,133 @@
+/* ==========================================================================
+   Information page — two-column layout
+   ========================================================================== */
+
+.info {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 3rem 4rem;
+  max-width: 80rem;
+}
+
+.info__col {
+  display: flex;
+  flex-direction: column;
+}
+
+.info__col section + section {
+  border-top: 1px solid var(--border);
+  padding-top: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.info h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  font-weight: 500;
+  margin: 0 0 1.5rem;
+}
+
+.info p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+
+.info p:last-child {
+  margin-bottom: 0;
+}
+
+.info__name {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 1.05rem;
+  margin: 0 0 1.5rem;
+  line-height: 1.4;
+}
+
+.info__name strong {
+  font-weight: 700;
+}
+
+.info__name span {
+  color: var(--muted);
+}
+
+/* Contact list (column-stacked) */
+.info-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.info-contact a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: max-content;
+}
+
+.info-contact a span {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  transition: border-color 0.15s ease;
+}
+
+.info-contact a:hover span {
+  border-bottom-color: var(--fg);
+}
+
+.info-contact__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Year/label + content rows (education, expositions, experiences) */
+.info ul.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 1.25rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.info-list li:last-child {
+  border-bottom: 0;
+}
+
+.info-list .info-list__year {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 800px) {
+  .info {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .info-list li {
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1rem;
+  }
+}

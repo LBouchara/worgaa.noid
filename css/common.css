@@ -1,0 +1,564 @@
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Theme + layout primitives
+   ========================================================================== */
+
+:root {
+  --bg: #191919;
+  --fg: #ffffff;
+  --muted: #9a9a9a;
+  --border: #2c2c2c;
+  --accent: #ffffff;
+  --placeholder: #222222;
+  --max-width: 1200px;
+  --gutter: 1.5rem;
+  --font-sans: "Courier New", Courier, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ==========================================================================
+   Site header + nav
+   ========================================================================== */
+
+.site-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0 var(--gutter);
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.site-nav a {
+  color: var(--muted);
+  padding: 0.25rem 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.site-nav a:hover {
+  color: var(--fg);
+}
+
+.site-nav a.is-active {
+  color: var(--fg);
+  border-bottom-color: var(--fg);
+}
+
+/* Burger toggle (hidden on desktop, shown via @media below) */
+.site-nav-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  padding: 0.5rem;
+  margin: 0;
+  cursor: pointer;
+  color: var(--fg);
+  font: inherit;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-nav-toggle__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+}
+
+.site-nav-toggle__icon--close {
+  display: none;
+}
+
+.site-nav-toggle[aria-expanded="true"] .site-nav-toggle__icon--menu {
+  display: none;
+}
+
+.site-nav-toggle[aria-expanded="true"] .site-nav-toggle__icon--close {
+  display: block;
+}
+
+/* Social icons (right-aligned in the header) */
+.site-social {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.75;
+  transition: opacity 0.15s ease;
+}
+
+.site-social a:hover {
+  opacity: 1;
+}
+
+.site-social img {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+  display: block;
+}
+
+/* ==========================================================================
+   Page header (big title) + main
+   ========================================================================== */
+
+.page-header {
+  padding: 6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header__title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1;
+}
+
+.page-main {
+  padding: 3rem 0 5rem;
+}
+
+/* ==========================================================================
+   Site footer
+   ========================================================================== */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.site-footer__inner {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ==========================================================================
+   Back to top button (injected by js/app.js)
+   ========================================================================== */
+
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fg);
+  color: var(--bg);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease;
+  z-index: 20;
+  font: inherit;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top:hover {
+  background: var(--muted);
+}
+
+.back-to-top svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+/* ==========================================================================
+   Lightbox / carousel (injected by js/app.js)
+   ========================================================================== */
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+body.lightbox-open .back-to-top {
+  display: none;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.94);
+  z-index: 100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 4.5rem;
+}
+
+.lightbox.is-open {
+  display: flex;
+}
+
+.lightbox__figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  background: var(--placeholder);
+}
+
+.lightbox__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  text-align: center;
+  color: var(--fg);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.lightbox__caption .work-title {
+  font-size: 0.95rem;
+}
+
+.lightbox__caption .work-format,
+.lightbox__caption .work-date {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.lightbox__close,
+.lightbox__nav {
+  position: absolute;
+  background: none;
+  border: 0;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  opacity: 1;
+}
+
+.lightbox__close {
+  top: 1rem;
+  right: 1rem;
+}
+
+.lightbox__close svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.lightbox__nav {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox__nav svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.lightbox__prev {
+  left: 1rem;
+}
+
+.lightbox__next {
+  right: 1rem;
+}
+
+/* ==========================================================================
+   Responsive (common)
+   ========================================================================== */
+
+@media (max-width: 800px) {
+  :root {
+    --gutter: 1rem;
+  }
+
+  .page-header {
+    padding: 2.5rem 0 1.75rem;
+  }
+
+  .page-main {
+    padding: 2rem 0 4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Header stays in a single row: social icons left, burger right.
+     The inline nav is hidden — replaced by the burger that opens an overlay. */
+  .site-header__inner {
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-nav-toggle {
+    display: inline-flex;
+    order: -1;       /* burger to the far left, social stays right */
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .site-nav.is-open {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    background: var(--bg);
+    z-index: 40;
+    font-size: 1.5rem;
+  }
+
+  .site-nav.is-open a {
+    color: var(--fg);
+    padding: 0.5rem 0;
+  }
+
+  body.nav-open {
+    overflow: hidden;
+  }
+
+  .lightbox {
+    padding: 3rem 0.75rem 4.5rem;
+  }
+
+  .lightbox__nav {
+    top: auto;
+    bottom: 0.75rem;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+.hidden,
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  white-space: inherit;
+  width: auto;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.clearfix::before,
+.clearfix::after {
+  content: "";
+  display: table;
+}
+
+.clearfix::after {
+  clear: both;
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
+
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after {
+    content: "";
+  }
+
+  pre {
+    white-space: pre-wrap !important;
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
